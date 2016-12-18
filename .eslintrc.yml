@@ -1,0 +1,27 @@
+extends:
+  - eslint:recommended
+
+rules:
+  arrow-parens: error
+  arrow-spacing: error
+  comma-dangle: [error, always-multiline]
+  no-constant-condition: off
+  no-unexpected-multiline: error
+  no-unreachable: error
+  no-unused-vars: [error, { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }]
+  no-var: error
+  object-shorthand: error
+  prefer-arrow-callback: error
+  prefer-const: error
+  prefer-template: error
+  quotes: [error, double]
+  semi: [error, never]
+
+root: true
+
+env:
+  es6: true
+  node: true
+
+parserOptions:
+  sourceType: module

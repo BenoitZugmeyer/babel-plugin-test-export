@@ -1,0 +1,26 @@
+{
+  "name": "babel-plugin-test-export",
+  "version": "1.0.0-beta.0",
+  "license": "ISC",
+  "description": "Export private variables and functions to your tests",
+  "repository": "https://github.com/BenoitZugmeyer/babel-plugin-test-export",
+  "author": "Benoît Zugmeyer <benoit@zugmeyer.com>",
+  "main": "src/index.js",
+  "devDependencies": {
+    "jest": "^18.0.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "babel",
+    "testing",
+    "test",
+    "expose",
+    "plugin",
+    "babel-plugin"
+  ],
+  "jest": {
+    "testRegex": "/__tests__/(?!fixtures/).*\\.js$"
+  }
+}
