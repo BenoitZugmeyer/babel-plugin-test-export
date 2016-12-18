@@ -1,5 +1,7 @@
 # babel-plugin-test-export
 
+[![Build Status](https://travis-ci.org/BenoitZugmeyer/babel-plugin-test-export.svg?branch=master)](https://travis-ci.org/BenoitZugmeyer/babel-plugin-test-export)
+
 Export private variables and functions to your tests. Annotate variable and function declarations
 with a `// @test-export` comment and they will be exported in a `__test__` property of the module.
 Use values exported like this to write more focused tests or to mock things.
