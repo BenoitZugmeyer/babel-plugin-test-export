@@ -7,7 +7,7 @@
   "author": "Benoît Zugmeyer <benoit@zugmeyer.com>",
   "main": "src/index.js",
   "devDependencies": {
-    "jest": "^18.0.0"
+    "jest": "^20.0.4"
   },
   "scripts": {
     "test": "jest"
