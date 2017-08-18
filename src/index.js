@@ -1,19 +1,27 @@
 "use strict"
 
-function hasExposeComment(node) {
-  if (!node || !node.leadingComments) return false
-  return node.leadingComments.some((comment) => (
-    comment.value.includes("@test-export")
-  ))
+function isExposeComment(comment) {
+  return comment.value.includes("@test-export")
+}
+
+function hasExposeComment(path) {
+  if (!path.node) return false
+  if (path.node.leadingComments) {
+    return path.node.leadingComments.some(isExposeComment)
+  }
+  const previousPath = path.getPrevSibling()
+  if (previousPath.node && previousPath.node.trailingComments) {
+    return previousPath.node.trailingComments.some(isExposeComment)
+  }
 }
 
 function maybeDeclareExport(t, state, path) {
   if (state.get("exportDeclared")) return
   state.set("exportDeclared", true)
 
-  const statement = path.find((p) => p.parentPath.isProgram())
+  const program = path.find((p) => p.isProgram())
 
-  // statement.insertBefore(
+  // program.insertBefore(
   //   t.exportNamedDeclaration(
   //     t.variableDeclaration("const", [
   //       t.variableDeclarator(
@@ -25,7 +33,8 @@ function maybeDeclareExport(t, state, path) {
   //   )
   // )
 
-  statement.insertBefore(
+  program.unshiftContainer(
+    "body",
     t.variableDeclaration("const", [
       t.variableDeclarator(
         t.identifier("__test__"),
@@ -34,7 +43,7 @@ function maybeDeclareExport(t, state, path) {
     ])
   )
 
-  statement.parentPath.pushContainer(
+  program.pushContainer(
     "body",
     t.assignmentExpression(
       "=",
@@ -95,7 +104,7 @@ module.exports = function ({ types: t }) {
     visitor: {
 
       VariableDeclaration(path, state) {
-        if (!hasExposeComment(path.node)) return
+        if (!hasExposeComment(path)) return
 
         maybeDeclareExport(t, state, path)
 
@@ -112,7 +121,7 @@ module.exports = function ({ types: t }) {
       },
 
       FunctionDeclaration(path, state) {
-        if (!hasExposeComment(path.node)) return
+        if (!hasExposeComment(path)) return
 
         maybeDeclareExport(t, state, path)
 
