@@ -1,5 +1,3 @@
-"use strict"
-
 function isExposeComment(comment) {
   return comment.value.includes("@test-export")
 }
@@ -19,7 +17,7 @@ function maybeDeclareExport(t, state, path) {
   if (state.get("exportDeclared")) return
   state.set("exportDeclared", true)
 
-  const program = path.find((p) => p.isProgram())
+  const program = path.find(p => p.isProgram())
 
   // program.insertBefore(
   //   t.exportNamedDeclaration(
@@ -36,11 +34,8 @@ function maybeDeclareExport(t, state, path) {
   program.unshiftContainer(
     "body",
     t.variableDeclaration("const", [
-      t.variableDeclarator(
-        t.identifier("__test__"),
-        t.objectExpression([])
-      ),
-    ])
+      t.variableDeclarator(t.identifier("__test__"), t.objectExpression([])),
+    ]),
   )
 
   program.pushContainer(
@@ -48,14 +43,11 @@ function maybeDeclareExport(t, state, path) {
     t.assignmentExpression(
       "=",
       t.memberExpression(
-        t.memberExpression(
-          t.identifier("module"),
-          t.identifier("exports")
-        ),
-        t.identifier("__test__")
+        t.memberExpression(t.identifier("module"), t.identifier("exports")),
+        t.identifier("__test__"),
       ),
-      t.identifier("__test__")
-    )
+      t.identifier("__test__"),
+    ),
   )
 }
 
@@ -92,31 +84,32 @@ function maybeReplace(path, { t, id, newNode }) {
       call.callee = t.memberExpression(newNode, t.identifier("call"))
       call.arguments.unshift(t.identifier("undefined"))
       path.parentPath.replaceWith(call)
-    }
-    else {
+    } else {
       path.replaceWith(newNode)
     }
   }
 }
 
-module.exports = function ({ types: t }) {
+module.exports = function({ types: t }) {
   return {
     visitor: {
-
       VariableDeclaration(path, state) {
         if (!hasExposeComment(path)) return
 
         maybeDeclareExport(t, state, path)
 
         path.replaceWithMultiple(
-          path.node.declarations.map((declaration) => {
-
+          path.node.declarations.map(declaration => {
             const newNode = replaceNode(t, path.scope, declaration)
 
             return t.expressionStatement(
-              t.assignmentExpression("=", newNode, declaration.init || t.identifier("undefined"))
+              t.assignmentExpression(
+                "=",
+                newNode,
+                declaration.init || t.identifier("undefined"),
+              ),
             )
-          })
+          }),
         )
       },
 
@@ -132,11 +125,10 @@ module.exports = function ({ types: t }) {
 
         path.replaceWith(
           t.expressionStatement(
-            t.assignmentExpression("=", newNode, expression)
-          )
+            t.assignmentExpression("=", newNode, expression),
+          ),
         )
       },
-
     },
   }
 }
