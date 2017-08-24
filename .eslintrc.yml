@@ -1,6 +1,10 @@
 extends:
   - benoitz-prettier
 
+rules:
+  # be compatible with node 6
+  prettier/prettier: [ error, { trailingComma: "es5", semi: false } ]
+
 root: true
 
 env:

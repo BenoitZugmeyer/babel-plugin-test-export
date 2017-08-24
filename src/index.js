@@ -35,7 +35,7 @@ function maybeDeclareExport(t, state, path) {
     "body",
     t.variableDeclaration("const", [
       t.variableDeclarator(t.identifier("__test__"), t.objectExpression([])),
-    ]),
+    ])
   )
 
   program.pushContainer(
@@ -44,10 +44,10 @@ function maybeDeclareExport(t, state, path) {
       "=",
       t.memberExpression(
         t.memberExpression(t.identifier("module"), t.identifier("exports")),
-        t.identifier("__test__"),
+        t.identifier("__test__")
       ),
-      t.identifier("__test__"),
-    ),
+      t.identifier("__test__")
+    )
   )
 }
 
@@ -106,10 +106,10 @@ module.exports = function({ types: t }) {
               t.assignmentExpression(
                 "=",
                 newNode,
-                declaration.init || t.identifier("undefined"),
-              ),
+                declaration.init || t.identifier("undefined")
+              )
             )
-          }),
+          })
         )
       },
 
@@ -125,8 +125,8 @@ module.exports = function({ types: t }) {
 
         path.replaceWith(
           t.expressionStatement(
-            t.assignmentExpression("=", newNode, expression),
-          ),
+            t.assignmentExpression("=", newNode, expression)
+          )
         )
       },
     },
