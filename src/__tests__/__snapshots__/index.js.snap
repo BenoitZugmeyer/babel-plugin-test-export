@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`function imbrication 1`] = `
+"const __test__ = {};
+
+// @test-export
+__test__.foo = function foo(str) {
+  console.log(str);
+  function foo() {}
+  foo();
+}
+
+// @test-export
+;
+
+__test__.bar = function bar() {
+  __test__.bar.biz = 1;
+};
+
+__test__.foo.call(undefined, \\"foo\\");
+module.exports.__test__ = __test__"
+`;
+
+exports[`previous statement trailing comment 1`] = `
+"const __test__ = {};
+
+// foo
+const Biz = {
+    bar: true
+
+    // @test-export
+};
+__test__.format = function format(rights) {
+    console.log('whatever');
+};
+
+module.exports = {};
+module.exports.__test__ = __test__"
+`;
+
+exports[`readme example 1`] = `
+"const __test__ = {};
+
+// @test-export
+__test__.appendFoo = function appendFoo(str) {
+    return str + \\"foo\\";
+};
+
+module.exports = function (str) {
+    return __test__.appendFoo.call(undefined, str).toUpperCase();
+};
+module.exports.__test__ = __test__"
+`;
+
+exports[`simple function 1`] = `
+"const __test__ = {};
+
+// @test-export
+__test__.foo = function foo() {};
+
+module.exports.__test__ = __test__"
+`;
+
+exports[`simple variable 1`] = `
+"const __test__ = {};
+
+// @test-export
+__test__.foo = 42;
+module.exports.__test__ = __test__"
+`;
+
+exports[`variables usage inside functions 1`] = `
+"const __test__ = {};
+
+// @test-export
+__test__.foo = undefined;
+__test__.bar = undefined;
+
+// @test-export
+
+__test__.a = 42;
+
+
+__test__.foo = 12;
+
+__test__.bar = __test__.foo;
+biz = 12;
+
+function blah() {
+  return __test__.foo;
+}
+
+function blih() {
+  var foo;
+  return foo;
+}
+module.exports.__test__ = __test__"
+`;

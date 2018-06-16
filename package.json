@@ -23,11 +23,5 @@
     "plugin",
     "babel-plugin"
   ],
-  "jest": {
-    "testRegex": "/__tests__/(?!fixtures/).*\\.js$",
-    "transformIgnorePatterns": [
-      "^"
-    ]
-  },
   "dependencies": {}
 }
