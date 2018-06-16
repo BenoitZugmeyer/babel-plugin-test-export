@@ -81,8 +81,10 @@ function maybeReplace(path, { t, id, newNode }) {
   if (path.node.name === id.name) {
     if (path.parentPath.isCallExpression()) {
       const call = t.clone(path.parentPath.node)
-      call.callee = t.memberExpression(newNode, t.identifier("call"))
-      call.arguments.unshift(t.identifier("undefined"))
+      call.callee = t.sequenceExpression([
+        t.unaryExpression("void", t.numericLiteral(0)),
+        newNode,
+      ])
       path.parentPath.replaceWith(call)
     } else {
       path.replaceWith(newNode)

@@ -31,7 +31,7 @@ __test__.bar = function bar() {
   __test__.bar.biz = 1;
 };
 
-__test__.foo.call(undefined, \\"foo\\");
+(void 0, __test__.foo)(\\"foo\\");
 module.exports.__test__ = __test__"
 `;
 
@@ -61,7 +61,7 @@ __test__.appendFoo = function appendFoo(str) {
 };
 
 module.exports = function (str) {
-    return __test__.appendFoo.call(undefined, str).toUpperCase();
+    return (void 0, __test__.appendFoo)(str).toUpperCase();
 };
 module.exports.__test__ = __test__"
 `;

@@ -75,7 +75,7 @@ __test__.appendFoo = function appendFoo(str) {
 };
 
 module.exports = function (str) {
-    return __test__.appendFoo.call(undefined, str).toUpperCase();
+    return (void 0, __test__.appendFoo)(str).toUpperCase();
 };
 module.exports.__test__ = __test__
 ```
