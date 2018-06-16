@@ -7,10 +7,10 @@
   "author": "Benoît Zugmeyer <benoit@zugmeyer.com>",
   "main": "src/index.js",
   "devDependencies": {
-    "eslint": "^4.5.0",
+    "eslint": "^4.19.1",
     "eslint-config-benoitz-prettier": "^1.0.1",
-    "jest": "^20.0.4",
-    "prettier": "^1.5.3"
+    "jest": "^23.1.0",
+    "prettier": "^1.13.5"
   },
   "scripts": {
     "test": "jest"
@@ -25,7 +25,9 @@
   ],
   "jest": {
     "testRegex": "/__tests__/(?!fixtures/).*\\.js$",
-    "transformIgnorePatterns": ["^"]
+    "transformIgnorePatterns": [
+      "^"
+    ]
   },
   "dependencies": {}
 }
