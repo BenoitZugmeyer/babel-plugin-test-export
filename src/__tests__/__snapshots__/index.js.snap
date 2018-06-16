@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`classes 1`] = `
+"const __test__ = {};
+
+// @test-export
+__test__.Foo = class Foo {};
+
+
+function foo(e) {
+  if (e instanceof __test__.Foo) {}
+  return new __test__.Foo();
+}
+module.exports.__test__ = __test__"
+`;
+
 exports[`function imbrication 1`] = `
 "const __test__ = {};
 

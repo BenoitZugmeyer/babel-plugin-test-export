@@ -129,6 +129,23 @@ module.exports = function({ types: t }) {
           )
         )
       },
+
+      ClassDeclaration(path, state) {
+        if (!hasExposeComment(path)) return
+
+        maybeDeclareExport(t, state, path)
+
+        const newNode = replaceNode(t, path.parentPath.scope, path.node)
+
+        const expression = t.clone(path.node)
+        expression.type = "ClassExpression"
+
+        path.replaceWith(
+          t.expressionStatement(
+            t.assignmentExpression("=", newNode, expression)
+          )
+        )
+      },
     },
   }
 }

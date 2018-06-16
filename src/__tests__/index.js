@@ -100,3 +100,19 @@ module.exports = function (str) {
     `)
   ).toMatchSnapshot()
 })
+
+test("classes", () => {
+  expect(
+    transformCode(`
+// @test-export
+class Foo {
+}
+
+function foo(e) {
+  if (e instanceof Foo) {
+  }
+  return new Foo()
+}
+    `)
+  ).toMatchSnapshot()
+})
