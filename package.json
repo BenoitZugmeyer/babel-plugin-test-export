@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-test-export",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0",
   "license": "ISC",
   "description": "Export private variables and functions to your tests",
   "repository": "https://github.com/BenoitZugmeyer/babel-plugin-test-export",
